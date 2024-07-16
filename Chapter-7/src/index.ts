@@ -36,3 +36,47 @@ console.log(totalOfOrder1(order1));
 console.log(order1["akram"]); // returning undefined but not issue with TS
 
 //--------------------------------------------------------------------------------//
+//complex example and use of keyof assertion
+interface Gamer {
+  // [key: string]: number | string | boolean | undefined;
+  games: number;
+  levels?: string;
+  online: boolean;
+}
+
+const gamer1: Gamer = {
+  games: 1,
+  levels: "biggner",
+  online: false,
+};
+
+for (let specs in gamer1) {
+  // both these expression are now true
+  console.log(`${specs}: ${gamer1[specs as keyof typeof gamer1]}`);
+  // console.log(`${specs}: ${gamer1[specs as keyof Gamer]}`);
+}
+
+//-----------------------------------------------------------------------//
+// solution to the problem in section 1
+
+// if we predifine keys of object as 'literals' then we can solve the problem but TS will give error that you may check in following commented inteface
+// interface Car {
+//   [key: "honda" | "suzuki" | "united"]: string;
+// }
+
+//==> solution is here
+
+type Keys = "honda" | "suzuki" | "united";
+type Cars = Record<Keys, string>; // 'Record' is special, 'Keys' are object keys and 'string' is object key's value type
+
+const carCollection: Cars = {
+  honda: "City",
+  suzuki: "mehran",
+  united: "bravo",
+};
+
+// console.log(carCollection["kia"]); //the problem is now solved and this line will give error
+
+for (const car in carCollection) {
+  console.log(`${car}: ${carCollection[car as keyof Cars]}`);
+}

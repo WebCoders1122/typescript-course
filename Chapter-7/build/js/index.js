@@ -24,4 +24,22 @@ const totalOfOrder1 = (order) => {
 console.log(totalOfOrder1(order1));
 //problem index signatures=> we can write code to access property that even not exists in object but TS will allow it due to index signatures
 console.log(order1["akram"]); // returning undefined but not issue with TS
-//--------------------------------------------------------------------------------//
+const gamer1 = {
+    games: 1,
+    levels: "biggner",
+    online: false,
+};
+for (let specs in gamer1) {
+    // both these expression are now true
+    console.log(`${specs}: ${gamer1[specs]}`);
+    // console.log(`${specs}: ${gamer1[specs as keyof Gamer]}`);
+}
+const carCollection = {
+    honda: "City",
+    suzuki: "mehran",
+    united: "bravo",
+};
+// console.log(carCollection["kia"]); //the problem is now solved and this line will give error
+for (const car in carCollection) {
+    console.log(`${car}: ${carCollection[car]}`);
+}
