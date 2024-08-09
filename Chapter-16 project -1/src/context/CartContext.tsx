@@ -60,10 +60,14 @@ const useCartContextValues = () => {
   //total items in cart
   const cartItemsCount = cart.reduce((prev, curr) => prev + curr.quantity, 0);
   //total price of cart
-  const cartPriceCount = cart.reduce(
+  const price = cart.reduce(
     (prev, curr) => prev + curr.price * curr.quantity,
     0
   );
+  const cartPriceCount = Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "pkr",
+  }).format(price);
   //memoized reducre actions
   const REDUCER_ACTIONS = useMemo(() => ReducerActionTypes, []);
   return { cart, dispatch, cartItemsCount, cartPriceCount, REDUCER_ACTIONS };
@@ -73,7 +77,7 @@ const initialCartState: initialCartStateType = {
   cart: [],
   dispatch: () => {},
   cartItemsCount: 0,
-  cartPriceCount: 0,
+  cartPriceCount: "0",
   REDUCER_ACTIONS: ReducerActionTypes,
 };
 

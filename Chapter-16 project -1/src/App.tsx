@@ -1,10 +1,25 @@
-import { useCart } from "./context/CartContext";
-import { useProducts } from "./context/ProductContext";
+import { useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Cart from "./components/Cart";
+import ProductList from "./components/ProductList";
 
 const App = () => {
-  const products = useProducts();
-  const cart = useCart();
-  console.log(cart);
-  return <div>App</div>;
+  //for dynamic button
+  const [isCartPage, setIsCartPage] = useState<boolean>(false);
+
+  const content = isCartPage ? <Cart /> : <ProductList />;
+
+  return (
+    <>
+      <Header
+        isCartPage={isCartPage}
+        setIsCartPage={setIsCartPage}
+      />
+      {/* content */}
+      {content}
+      <Footer isCartPage={isCartPage} />
+    </>
+  );
 };
 export default App;
