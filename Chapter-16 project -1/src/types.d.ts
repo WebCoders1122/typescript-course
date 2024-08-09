@@ -18,3 +18,10 @@ type CART_REDUCER_ACTION_TYPES = {
   QUANTITY: "QUANTITY";
   SUBMIT: "SUBMIT";
 };
+
+type CartType = {
+  sku: any;
+  price: any;
+  name: any;
+  quantity: number;
+};

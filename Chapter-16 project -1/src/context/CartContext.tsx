@@ -58,10 +58,10 @@ const useCartContextValues = () => {
     return itemA - itemB;
   });
   //total items in cart
-  const cartItemsCount = cart.reduce((prev, curr) => prev + curr.quantity, 0);
+  const cartItemsCount = cart.reduce((prev, curr) => +prev + +curr.quantity, 0);
   //total price of cart
   const price = cart.reduce(
-    (prev, curr) => prev + curr.price * curr.quantity,
+    (prev, curr) => +prev + +curr.price * +curr.quantity,
     0
   );
   const cartPriceCount = Intl.NumberFormat("en-US", {
